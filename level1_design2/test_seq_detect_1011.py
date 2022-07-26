@@ -26,11 +26,13 @@ async def test_seq_bug1(dut):
 
    # cocotb.log.info('#### CTB: Develop your test here! ######')
 
-  
-    for i in range(1):
+   
+    for i in range(256):
 
-      #  a=format(i, '08b')
-        a='10111011'
+        
+        a=format(i, '08b')
+        dut._log.info(f"Sequence : {a} ")
+        #a='11011000'
         inp=list(a)
         l=a.find('1011')
         m=a.rfind('1011')
@@ -49,7 +51,7 @@ async def test_seq_bug1(dut):
             dut.inp_bit.value = int(inp[j])
             await FallingEdge(dut.clk)
             dut._log.info(f'DUT input = > {dut.inp_bit.value} \n Expected Output => {out[j]} \n Output => {dut.seq_seen.value}')
-           
+            assert out[j] == dut.seq_seen.value, f"Incorrect => Expected : {out[j]} Got : {dut.seq_seen.value}"
         
    
 
