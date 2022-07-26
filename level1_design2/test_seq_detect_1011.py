@@ -32,7 +32,7 @@ async def test_seq_bug1(dut):
         
         a=format(i, '08b')
         dut._log.info(f"Sequence : {a} ")
-        #a='11011000'
+       # a='10111011'
         inp=list(a)
         l=a.find('1011')
         m=a.rfind('1011')
