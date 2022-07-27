@@ -18,6 +18,7 @@ module seq_detect_1011(seq_seen, inp_bit, reset, clk);
   // if the current state of the FSM has the sequence 1011, then the output is
   // high
   assign seq_seen = current_state == SEQ_1011 ? 1 : 0;
+ 
 
   // state transition
   always @(posedge clk)
@@ -33,7 +34,7 @@ module seq_detect_1011(seq_seen, inp_bit, reset, clk);
   end
 
   // state transition based on the input and current state
-  always @(inp_bit or current_state)
+  always @(inp_bit , current_state)
   begin
     case(current_state)
       IDLE:
@@ -68,8 +69,12 @@ module seq_detect_1011(seq_seen, inp_bit, reset, clk);
       end
       SEQ_1011:
       begin
-        next_state = IDLE;
+        if(inp_bit == 1)
+          next_state = SEQ_1;
+        else
+          next_state = IDLE;
       end
     endcase
+    $monitor(current_state,next_state);
   end
 endmodule

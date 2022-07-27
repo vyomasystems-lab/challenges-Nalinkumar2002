@@ -19,40 +19,49 @@ async def test_seq_bug1(dut):
     cocotb.start_soon(clock.start())        # Start the clock
  
     # reset
-    dut.reset.value = 1
-    await FallingEdge(dut.clk)
-    dut.reset.value = 0
-    await FallingEdge(dut.clk)
+    # dut.reset.value = 1
+    # await FallingEdge(dut.clk)
+    # dut.reset.value = 0
+    # await FallingEdge(dut.clk)
 
    # cocotb.log.info('#### CTB: Develop your test here! ######')
 
    
     for i in range(256):
 
-        
-        a=format(i, '08b')
-        dut._log.info(f"Sequence : {a} ")
-       # a='10111011'
-        inp=list(a)
-        l=a.find('1011')
-        m=a.rfind('1011')
-        out = [0]*8
-        if l == m :
-            if (l != -1) :
-                out[l+3]=1
-        elif l+3 == m :
-            out[l+3]=1
-        else:
-            out[l+3]=1
-            out[m+3]=1
-
-        for j in range(8):
-
-            dut.inp_bit.value = int(inp[j])
+        if i != 256: 
+          
+            dut.reset.value = 1
             await FallingEdge(dut.clk)
-            dut._log.info(f'DUT input = > {dut.inp_bit.value} \n Expected Output => {out[j]} \n Output => {dut.seq_seen.value}')
-            assert out[j] == dut.seq_seen.value, f"Incorrect => Expected : {out[j]} Got : {dut.seq_seen.value}"
-        
-   
+            dut.reset.value = 0
+            await FallingEdge(dut.clk)
+
+            a=format(i, '08b')
+            dut._log.info(f"Sequence : {a} ")
+            #a='01100000'
+            inp=list(a)
+            l=a.find('1011')
+            m=a.rfind('1011')
+            out = [0]*8
+            if l == m :
+                if (l != -1) :
+                    out[l+3]=1
+            elif l+3 == m :
+                out[l+3]=1
+            else:
+                out[l+3]=1
+                out[m+3]=1
+
+            for j in range(8):
+
+                await Timer(10, units='ns')
+                dut.inp_bit.value = int(inp[j])
+                await FallingEdge(dut.clk)
+                dut._log.info(f'DUT input = > {dut.inp_bit.value} \n Expected Output => {out[j]} \n Output => {dut.seq_seen.value} \n \
+                Current State => {dut.current_state.value} , Next State = >  {dut.next_state.value}')
+                assert out[j] == dut.seq_seen.value, f"Incorrect => Expected : {out[j]} Got : {dut.seq_seen.value}"
+           # dut._log.info(f"4.Reset= {dut.reset.value} ")
+            dut.inp_bit.value = 0 
+
 
     
