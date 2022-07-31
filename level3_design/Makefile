@@ -4,10 +4,15 @@ TOPLEVEL_LANG ?= verilog
 
 PWD=$(shell pwd)
 
-VERILOG_SOURCES = $(PWD)/               # provide your design path
+export PYTHONPATH := $(PWD):$(PYTHONPATH)
 
-TOPLEVEL :=           # design file
-MODULE   :=     # test file
+VERILOG_SOURCES = $(PWD)/rsa_main.v               # provide your design path
+
+TOPLEVEL := rsa_main          # design file
+MODULE   := test_rsa    # test file
+
+# TOPLEVEL := test1         # design file
+# MODULE   := test_test1    # test file
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
 
