@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module rsa_main(
+module rsa_main_bug(
 	 // input is what you want to encrypt or decrypt
     input [15:0] Input,
 	 input [7:0]prime_p,
@@ -11,18 +11,17 @@ module rsa_main(
 	 input start2,
 	 output [7:0]publicKey,
 	 output [15:0]n,
-
 	 output [15:0]Output,
 	 output [15:0] privateKey,
 	 output finish,
-	 output fin1
+	 output fin1,
+	 output [15:0] phin
     );
 	
 	 wire [15:0] MPower;
 	 parameter InstructionSelector = 0;
-	 reg [15:0] phin;
 
-	
+	 assign phin=(prime_p-1)*(prime_q-1);
 	 
 	 public_key_gen k1 (prime_p,prime_q,start,clk,publicKey,finish);
 	 private_key_gen kd1 (prime_p,prime_q,publicKey,clk,start1,n,privateKey,fin1);

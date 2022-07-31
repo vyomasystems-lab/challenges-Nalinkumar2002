@@ -14,8 +14,6 @@ def mod_inverse(a, m):
             return x
     return -1
 
-p = 7
-q = 13
 
 def generate_keypair(p, q):
 
@@ -35,9 +33,6 @@ def generate_keypair(p, q):
         if g == 1 and e != d:
             break
 
-    #public key (e,n)
-    #private key (d,n)
-
     return ((e, n), (d, n), phi)
 
 
@@ -53,15 +48,20 @@ def decrypt(msg_ciphertext, package):
     msg_plaintext = pow(msg_ciphertext, d, n)
     return (msg_plaintext)
 
-#if __name__ == "__main__":
 def model_rsa(msg,p,q):
     n=p*q
-    print("Key Generation....")
+    #print("Key Generation....")
     public, private, phi = generate_keypair( p, q)
-    print("Public Key: ", public)
-    print("Private Key: ", private)
+    e,n =public
+    d,n = private 
+    #print("Public Key: ", public)
+    #print("Private Key: ", private)
     encrypted_msg = encrypt(msg, public)
-    print("Encrypted msg: ")
-    print(encrypted_msg)
-    print("Decrypted msg: ")
-    print(decrypt(encrypted_msg, private))
+    #print("Encrypted msg: ")
+    #print(encrypted_msg)
+    #print("Decrypted msg: ")
+    decrypted_msg=decrypt(encrypted_msg, private)
+    #print(decrypted_msg)
+    
+    return msg,e,d,n,phi,encrypted_msg,decrypted_msg
+
