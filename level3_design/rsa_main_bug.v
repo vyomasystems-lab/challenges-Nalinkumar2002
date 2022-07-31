@@ -22,6 +22,8 @@ module rsa_main_bug(
 	 parameter InstructionSelector = 0;
 
 	 assign phin=(prime_p-1)*(prime_q-1);
+	 // BUG 
+	 //assign phin=(prime_p-1)+(prime_q-1);
 	 
 	 public_key_gen k1 (prime_p,prime_q,start,clk,publicKey,finish);
 	 private_key_gen kd1 (prime_p,prime_q,publicKey,clk,start1,n,privateKey,fin1);
@@ -76,6 +78,8 @@ begin
 		if(start) 
 		begin
 		x<=phin;
+		// BUG 
+		// random <= 6;
 		random<=3;  //start checking gcd from random number=3
 		y<=3;
 		gcd<=0;
@@ -158,7 +162,9 @@ module private_key_gen(input [7:0] p,
 	 end
 	 
 	 end
-assign d=B[31:16];
+// BUG 
+// assign d=B;	 
+ assign d=B[31:16];
 
 assign finished=B[15:0]==1;
 endmodule
@@ -187,6 +193,9 @@ begin
 		  if(start) begin
                 ncount = e-1;
 					 // $display("in start: ncount: %d; x: %d",ncount, x);
+					 
+					 // BUG
+					 // Mpower = M-1;
 					 Mpower = M;
 					 x=0;
 					 n1={16'b0000000000000000,n};
@@ -265,7 +274,9 @@ module div32(A,B,Res,rem_fin);
     begin
         a1 = A;		
         b1 = B;		
-        p1= 0;			
+		// BUG
+		p1 = 0;
+        p1= 1;			
         for(i=0;i < size_width;i=i+1)    begin
             p1 = {p1[size_width-2:0],a1[size_width-1]};
             a1[size_width-1:1] = a1[size_width-2:0];
