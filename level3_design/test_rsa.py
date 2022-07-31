@@ -64,9 +64,9 @@ async def test_rsa1(dut):
     dut_n = dut.n.value
     dut_output =dut.Output.value
     
-    cocotb.log.info(f' Public Key --> {int(dut_publicKey)}')
-    cocotb.log.info(f' Private Key --> {int(dut_privateKey)}')
-    cocotb.log.info(f'DUT OUTPUT={int(dut_output)}')
+    cocotb.log.info(f' Public Key --> {(dut_publicKey)}')
+    cocotb.log.info(f' Private Key --> {(dut_privateKey)}')
+    cocotb.log.info(f'DUT OUTPUT={(dut_output)}')
     cocotb.log.info(f'EXPECTED OUTPUT={(expected_output)}')
     
     # comparison
