@@ -22,7 +22,7 @@ def clock_gen(signal):
 def run_test(dut):
 
     # clock
-    cocotb.fork(clock_gen(dut.CLK))
+    cocotb.fork(clock_gen(dut.clk))
 
     # reset
     dut.Input.value <= 0
@@ -47,15 +47,18 @@ def run_test(dut):
     dut.start2.value <= 1
     yield Timer(100)
     dut.start2.value <= 0
+    yield Timer(100)
 
     expected_output = 39   
 
+    yield Timer(5000)
+    
     # obtaining the output
     dut_publicKey = dut.publicKey.value
     dut_privateKey = dut.privateKey.value
     dut_n = dut.n.value
     dut_output =dut.Output.value
-
+    
     cocotb.log.info(f' Public Key --> {int(dut_publicKey)}')
     cocotb.log.info(f' Private Key --> {int(dut_privateKey)}')
     cocotb.log.info(f'DUT OUTPUT={int(dut_output)}')
