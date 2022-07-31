@@ -22,38 +22,38 @@ async def test_rsa1(dut):
 
     # reset
     
-    dut.Input.value <= 0
-    dut.prime_p.value <= 0
-    dut.prime_q.value <= 0
-    dut.start.value <= 0
-    dut.start1.value <= 0
-    dut.start2.value <= 0
-    await FallingEdge(dut.clk)
+    dut.Input.value = 0
+    dut.prime_p.value = 0
+    dut.prime_q.value = 0
+    dut.start.value = 0
+    dut.start1.value = 0
+    dut.start2.value = 0
+    #await FallingEdge(dut.clk)
     await Timer(100, units='ns')
-    dut.Input.value <= 65
-    dut.prime_p.value <= 7
-    dut.prime_q.value <= 13
-    await FallingEdge(dut.clk)
+    dut.Input.value = 65
+    dut.prime_p.value = 7
+    dut.prime_q.value = 13
+    #await FallingEdge(dut.clk)
     await Timer(100, units='ns')
-    dut.start.value <= 1
-    await FallingEdge(dut.clk)
+    dut.start.value = 1
+    #await FallingEdge(dut.clk)
     await Timer(50, units='ns')
-    dut.start.value <= 0
+    dut.start.value = 0
     await FallingEdge(dut.clk)
-    await Timer(400, units='ns')
-    dut.start1.value <= 1
-    await FallingEdge(dut.clk)
+    #await Timer(400, units='ns')
+    dut.start1.value = 1
+    #await FallingEdge(dut.clk)
     await Timer(100, units='ns')
-    dut.start1.value <= 0
-    await FallingEdge(dut.clk)
+    dut.start1.value = 0
+    #await FallingEdge(dut.clk)
     await Timer(300, units='ns')
-    dut.start2.value <= 1
-    await FallingEdge(dut.clk)
+    dut.start2.value = 1
+    #await FallingEdge(dut.clk)
     await Timer(100, units='ns')
-    dut.start2.value <= 0
-    await FallingEdge(dut.clk)
+    dut.start2.value = 0
+    #await FallingEdge(dut.clk)
     await Timer(100, units='ns')
-    await FallingEdge(dut.clk)
+    #await FallingEdge(dut.clk)
 
     expected_output = 39   
     
@@ -64,11 +64,12 @@ async def test_rsa1(dut):
     dut_n = dut.n.value
     dut_output =dut.Output.value
     
-    cocotb.log.info(f' Public Key --> {(dut_publicKey)}')
-    cocotb.log.info(f' Private Key --> {(dut_privateKey)}')
-    cocotb.log.info(f'DUT OUTPUT={(dut_output)}')
-    cocotb.log.info(f'EXPECTED OUTPUT={(expected_output)}')
+    cocotb.log.info(f' Public Key --> {int(dut_publicKey)}')
+    cocotb.log.info(f' Private Key --> {int(dut_privateKey)}')
+    cocotb.log.info(f'DUT OUTPUT={int(dut_output)}')
+    cocotb.log.info(f'EXPECTED OUTPUT={int(expected_output)}')
     
     # comparison
     error_message = f'Value mismatch DUT = {(dut_output)} does not match MODEL = {(expected_output)}'
-    assert dut_output == expected_Output, error_message
+    assert int(str(dut_output).replace('x','0'), base=2) == expected_output, error_message
+

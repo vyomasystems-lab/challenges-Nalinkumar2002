@@ -8,7 +8,7 @@ export PYTHONPATH := $(PWD):$(PYTHONPATH)
 
 VERILOG_SOURCES = $(PWD)/rsa_main.v               # provide your design path
 
-TOPLEVEL := rsa_main          # design file
+TOPLEVEL := rsa_main    # design file
 MODULE   := test_rsa    # test file
 
 # TOPLEVEL := test1         # design file
