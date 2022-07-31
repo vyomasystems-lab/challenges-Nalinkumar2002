@@ -2,57 +2,62 @@ import random
 import sys
 import cocotb
 from cocotb.decorators import coroutine
-from cocotb.triggers import Timer, RisingEdge
 from cocotb.result import TestFailure
 from cocotb.clock import Clock
+from cocotb.triggers import RisingEdge, FallingEdge
+from cocotb.triggers import Timer
+
 
 #from model_rsa import *
 
 # Clock Generation
-@cocotb.coroutine
-def clock_gen(signal):
-    while True:
-        signal.value <= 0
-        yield Timer(1) 
-        signal.value <= 1
-        yield Timer(1) 
 
-# Sample Test
+
+
 @cocotb.test()
-def run_test(dut):
+async def test_rsa1(dut):
 
-    # clock
-    cocotb.fork(clock_gen(dut.clk))
+    clock = Clock(dut.clk, 1, units="ns")  # Create a 10us period clock on port clk
+    cocotb.start_soon(clock.start())        # Start the clock
 
     # reset
+    
     dut.Input.value <= 0
     dut.prime_p.value <= 0
     dut.prime_q.value <= 0
     dut.start.value <= 0
     dut.start1.value <= 0
     dut.start2.value <= 0
-    yield Timer(100) 
+    await FallingEdge(dut.clk)
+    await Timer(100, units='ns')
     dut.Input.value <= 65
     dut.prime_p.value <= 7
     dut.prime_q.value <= 13
-    yield Timer(100)
+    await FallingEdge(dut.clk)
+    await Timer(100, units='ns')
     dut.start.value <= 1
-    yield Timer(50)
+    await FallingEdge(dut.clk)
+    await Timer(50, units='ns')
     dut.start.value <= 0
-    yield Timer(400)
+    await FallingEdge(dut.clk)
+    await Timer(400, units='ns')
     dut.start1.value <= 1
-    yield Timer(100)
+    await FallingEdge(dut.clk)
+    await Timer(100, units='ns')
     dut.start1.value <= 0
-    yield Timer(300)
+    await FallingEdge(dut.clk)
+    await Timer(300, units='ns')
     dut.start2.value <= 1
-    yield Timer(100)
+    await FallingEdge(dut.clk)
+    await Timer(100, units='ns')
     dut.start2.value <= 0
-    yield Timer(100)
+    await FallingEdge(dut.clk)
+    await Timer(100, units='ns')
+    await FallingEdge(dut.clk)
 
     expected_output = 39   
-
-    yield Timer(5000)
     
+
     # obtaining the output
     dut_publicKey = dut.publicKey.value
     dut_privateKey = dut.privateKey.value
