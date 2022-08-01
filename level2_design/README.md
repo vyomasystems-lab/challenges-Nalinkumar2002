@@ -26,7 +26,7 @@ def clock_gen(signal):
 cocotb.fork(clock_gen(dut.CLK))
 
 ```
-DUT is reset to IDLE State before driving input values
+DUT is resetted before driving input values
 
 ```python
     dut.RST_N.value = 0
