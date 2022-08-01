@@ -82,7 +82,7 @@ This Bug is fixed by replacing `5'01101: out = 12`  with  `5'b01100: out = inp12
 
 After the First Bug is fixed, Assertion Error is raised when Select line input = 30
 
-![](Images/bug1.png)
+![](Images/bug2.png)
 
 ```verilog
  begin
