@@ -108,6 +108,9 @@ This Bug is fixed by including Select line input statement of 30.
 ```
 ## -- :bug: :hammer: Bug Fixed --
 
+Bugs are Fixed and test cases run successfully
+
+![img](Images/l1d1_1.png)
 ![img](Images/l1d1_3.png)
 
 ## 📝 Verification Strategy
@@ -120,7 +123,7 @@ This Bug is fixed by including Select line input statement of 30.
 ## 📝 Is the verification complete ?
 
  - [x] All Possible Select lines Combinations are tested and design bugs are fixed.
- - [x] Test cases are Passed Sucessfully
+ - [x] Test cases are Passed Successfully
  
  <details>
  <summary> Test Cases => Also available in `Output.md` </summary>
