@@ -4,7 +4,7 @@
   
 ![-------](Images/rainbowline.png)
 
-![logo](Images/logo.png)
+![logo](Images/logo1.png)
 
 ![-------](Images/rainbowline.png)
 
