@@ -13,7 +13,6 @@ from model_rsa import *
 # Clock Generation
 
 
-
 @cocotb.test()
 async def test_rsa1(dut):
 
@@ -87,7 +86,7 @@ async def test_rsa1(dut):
     cocotb.log.info(f'EXPECTED ENCRYPTED OUTPUT ==> {(encrypted_msg)}  DUT ENCRYPTED OUTPUT ==> {(dut_encrypt)} ')
     assert encrypted_msg == dut_encrypt, error_message5    
 
-    dut.Input.value = 1
+    dut.Input.value = 0
     dut.prime_p.value = 0
     dut.prime_q.value = 0
     dut.start.value = 0
