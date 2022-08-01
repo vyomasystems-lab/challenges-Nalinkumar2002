@@ -122,7 +122,8 @@ This Bug is fixed by including Select line input statement of 30.
  - [x] All Possible Select lines Combinations are tested and design bugs are fixed.
  - [x] Test cases are Passed Sucessfully
  
- :calendar: <details> <summary> Test Cases </summary>
+ <details>
+    <summary> Test Cases </summary>
     
     ```
      0.00ns INFO     Found test test_mux.test_mux
@@ -268,8 +269,9 @@ This Bug is fixed by including Select line input statement of 30.
                      ** TESTS=2 PASS=2 FAIL=0 SKIP=0                 32.00           0.02       2000.03  **
                      **************************************************************************************
 
-     ```                
-    </details>
+                
+```
+</details>
+</br>
  
- 
-  :heavy_check_mark: Design Verification is Complete
+:heavy_check_mark: Design Verification is Complete
