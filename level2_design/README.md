@@ -170,63 +170,48 @@ After fixing the previous bug next Assertion Error Raises when Input Instruction
 
 Bugs are Fixed and Test cases are successfully passed
 
+![](Images/bug2.png)
+
+![](Images/bug2.png)
+
 ![](Images/l2_3.png)
 
 
 ## 📝 Verification Strategy
 
-- Initially all possible combination of an 8-bit number sequence because it is sufficient that the sequence detector is perfect when it detects two consecutive sequence
+- Initially all possible combination of Instructions are looped in form of list with the help of excel
 - DUT output values are compared with expected values and design is being verified
 
 
 ## 📝 Is the verification complete ?
 
- - [x] All Possible Combinations of an 8-bit number sequences are tested and design bugs are fixed.
+ - [x] All Possible Combinations of Instructions are tested and design bugs are fixed.
  - [x] Test cases are Passed Sucessfully
  
  <details>
  <summary> Test Cases => Also available in 'Output.md' </summary>
  
 ```  
------------------- For Full Test Case Refer => " Output.md " File ------------------------
+------------------ For Full Test Cases Refer => " Output.md " File ------------------------
 
-     0.00ns INFO     Found test test_seq_detect_1011.test_seq_bug1
-     0.00ns INFO     running test_seq_bug1 (1/1)
- 15000.00ns INFO     Sequence : 00000000 
- 25000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 35000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 45000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 55000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 65000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 75000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 85000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 95000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 95000.00ns INFO     
-                     ----------------------
+ 0.00ns INFO     Found test test_mkbitmanip.run_test
+ 0.00ns INFO     running run_test (1/1)
+
+--ANDN 1
+     0.01ns INFO     DUT OUTPUT=0x800c001
+     0.01ns INFO     EXPECTED OUTPUT=0x800c001
+--ORN 2
+     0.01ns INFO     DUT OUTPUT=0x1ea7dfe5d
+     0.01ns INFO     EXPECTED OUTPUT=0x1ea7dfe5d
+--XNOR 3
+     0.01ns INFO     DUT OUTPUT=0x1e27d3e5d
+     0.01ns INFO     EXPECTED OUTPUT=0x1e27d3e5d
+--SLO  4
+     0.01ns INFO     DUT OUTPUT=0x106ffffff
+     0.01ns INFO     EXPECTED OUTPUT=0x106ffffff
+--SRO  5
+     0.01ns INFO     DUT OUTPUT=0x1ffffff91
+     0.01ns INFO     EXPECTED OUTPUT=0x1ffffff91
                      
                      .
                      .
@@ -234,158 +219,30 @@ Bugs are Fixed and Test cases are successfully passed
                      .
                      .
                         
-25215000.00ns INFO     Sequence : 11111100 
-25225000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25235000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25245000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25255000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25265000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25275000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25285000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 010 , Next State = >  000
-25295000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 000 , Next State = >  000
-25295000.00ns INFO     
-                       ----------------------
-                        
-25315000.00ns INFO     Sequence : 11111101 
-25325000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25335000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25345000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25355000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25365000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25375000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25385000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 010 , Next State = >  000
-25395000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 011 , Next State = >  100
-25395000.00ns INFO     
-                       ----------------------
-                        
-25415000.00ns INFO     Sequence : 11111110 
-25425000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25435000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25445000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25455000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25465000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25475000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25485000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25495000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 010 , Next State = >  000
-25495000.00ns INFO     
-                       ----------------------
-                        
-25515000.00ns INFO     Sequence : 11111111 
-25525000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25535000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25545000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25555000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25565000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25575000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25585000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25595000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25595000.00ns INFO     
-                       ----------------------
-                        
-25595000.00ns INFO     test_seq_bug1 passed
-25595000.00ns INFO     ********************************************************************************************
-                       ** TEST                                STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                       ********************************************************************************************
-                       ** test_seq_detect_1011.test_seq_bug1   PASS    25595000.00           0.78   33022815.63  **
-                       ********************************************************************************************
-                       ** TESTS=1 PASS=1 FAIL=0 SKIP=0                 25595000.00           0.79   32589225.59  **
-                       ********************************************************************************************
+--UNSHFLI  56  (check)
+     0.12ns INFO     DUT OUTPUT=0x184c34965
+     0.12ns INFO     EXPECTED OUTPUT=0x184c34965
+--GORCI 57
+     0.12ns INFO     DUT OUTPUT=0x1ffffffff
+     0.12ns INFO     EXPECTED OUTPUT=0x1ffffffff
+--GREVI  58
+     0.12ns INFO     DUT OUTPUT=0xc16c304f
+     0.12ns INFO     EXPECTED OUTPUT=0xc16c304f
+--_FSRI  59
+     0.12ns INFO     DUT OUTPUT=0x19061b41b
+     0.12ns INFO     EXPECTED OUTPUT=0x19061b41b
+--BFP  60
+--SLO function
+     0.13ns INFO     DUT OUTPUT=0x15c30da0d
+     0.13ns INFO     EXPECTED OUTPUT=0x15c30da0d
+     0.13ns INFO     run_test passed
+     0.13ns INFO     **************************************************************************************
+                     ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                     **************************************************************************************
+                     ** test_mkbitmanip.run_test       PASS           0.13           0.05          2.81  **
+                     **************************************************************************************
+                     ** TESTS=1 PASS=1 FAIL=0 SKIP=0                  0.13           0.06          2.13  **
+                     **************************************************************************************
                        
                        
 ```
