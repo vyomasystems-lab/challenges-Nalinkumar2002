@@ -92,7 +92,6 @@ The assert statement is used for comparing the DUT Output with the Expected Outp
 
 ## 📋 Test Scenario 
 
-Intially, Input sequence is started from `8b'00000000`
 
 ```python
     
@@ -138,326 +137,184 @@ Expected Output values and DUT Output values are verified using following code
 
 ## --- :ant: :mag:  Bug --- 1
 
-Assertion Error Raises when Input Sequence = 00011011
+Assertion Error Raises due to unmatched value of expected phi(n) and DUT phi(n) 
 
-![](Images/l1d2_3.png)
+![](Images/l3_2.png)
 
-With respect to previous passed sequence the design bug can be spotted easily. 
-
-The sequence 00010110 & 00010111 was passed sucessfully. So, the bug lies in SEQ1 state
+The design bug is shown below
 
 ```verilog
-SEQ_1:
-      begin
-        if(inp_bit == 1)
-          next_state = IDLE;        // => BUG
-        else
-          next_state = SEQ_10;
-      end
+// rsa_main_bug.v
+// Line 26
 
+	 assign phin=(prime_p-1)+(prime_q-1);  ==> BUG
+     
 ```
-
 
 ## --- :ant: :wrench:  Bug Fix --- 1
 
 This bug is fixed by following logic.
 
 ```verilog
-SEQ_1:
-      begin
-        if(inp_bit == 1)
-          next_state = SEQ_1;      // => BUG CORRECTED
-        else
-          next_state = SEQ_10;
-      end
+// rsa_snk_corrected.v
+// Line 24
+
+	 	 assign phin=(prime_p-1)*(prime_q-1);  ==> BUG CORRECTED
+     
 ```
 
 
 ## --- :ant: :mag:  Bug --- 2
 
-After fixing the previous bug  next Assertion Error Raises when Input Sequence = 00101011
+Assertion Error Raises due to unmatched value of expected PublicKey and DUT PublicKey
 
-![](Images/l1d2_4.png)
+![](Images/l3_3.png)
 
-The bug lies in SEQ101 state because sequence 8b'00001011 is passed sucessfully.
+The design bug is shown below
+
 
 ```verilog
-      SEQ_101:
-      begin
-        if(inp_bit == 1)
-          next_state = SEQ_1011;
-        else
-          next_state = IDLE;         //  => BUG
-      end
+// rsa_main_bug.v
+// Line 82
+
+always @(posedge clk)
+begin
+		if(start) begin
+		    random <= 6;   // ==> BUG
+		end
+end
+     
 ```
+
+
 
 ## --- :ant: :wrench:  Bug Fix --- 2
 
-The bug is fixed by following logic
+This bug is fixed by following logic.
 
 ```verilog
-      SEQ_101:
-      begin
-        if(inp_bit == 1)
-          next_state = SEQ_1011;
-        else
-          next_state = SEQ_10;         // => BUG CORRECTED
-      end
+// rsa_snk_corrected.v
+// Line 83
+
+
+always @(posedge clk)
+    begin
+		if(start) begin
+		    random <= 3;     // ==> BUG CORRECTED
+		end
+end
+     
 ```
+
 
 ## --- :ant: :mag:  Bug --- 3
 
-Assertion Error Raises when Input Sequence = 10111011
+Assertion Error Raises due to unmatched value of expected Private Key and DUT Private Key
 
-![](Images/l1d2_5.png)
+![](Images/l3_4.png)
 
-The bug lies in SEQ1011 state because sequence 8b'00001011 is passed sucessfully.
+The design bug is shown below
 
 ```verilog
-      SEQ_1011:
-      begin
-          next_state = IDLE;    //  => BUG
-      end
+// rsa_main_bug.v
+// Line 166
 
+assign d=B;	 // ==> BUG
+     
 ```
 
 ## --- :ant: :wrench:  Bug Fix --- 3
 
-The bug is fixed by following logic
+This bug is fixed by following logic.
+
 
 ```verilog
-      SEQ_1011:
-      begin
-        if(inp_bit == 1)         // ==> BUG CORRECTED
-          next_state = SEQ_1;
-        else
-          next_state = IDLE;
-      end
+// rsa_snk_corrected.v
+// Line 167
+
+ assign d=B[31:16];   // BUG CORRECTED
+     
 ```
+
+
+## --- :ant: :mag:  Bug --- 4
+
+Assertion Error Raises due to unmatched value of expected Encrypted Value and DUT Encrypted Value 
+
+![](Images/l3_5.png)
+
+The design bug is shown below
+
+
+```verilog
+// rsa_main_bug.v
+// Line 198
+
+    Mpower = M-1;  ==> BUG
+     
+```
+
+
+## --- :ant: :wrench:  Bug Fix --- 4
+
+This bug is fixed by following logic.
+
+
+```verilog
+// rsa_snk_corrected.v
+// Line 199
+
+	Mpower = M;  ==> BUG CORRECTED
+     
+```
+
 
 
 ## -- :bug: :hammer: Bug Fixed --
 
 Bugs are Fixed and Test cases run successfully
 
-![](Images/l1d2_2.png)
+![](Images/l3_1.png)
 
-![](Images/l1d2_1.png)
 
 
 ## 📝 Verification Strategy
 
-- Initially all possible combination of an 8-bit number sequence because it is sufficient that the sequence detector is perfect when it detects two consecutive sequence
+- RSA Model python file was used for getting expected values and process - wise verification is done.   
 - DUT output values are compared with expected values and design is being verified
 
 
 ## 📝 Is the verification complete ?
 
- - [x] All Possible Combinations of an 8-bit number sequences are tested and design bugs are fixed.
+ - [x] Given Input is Encrypted and Decrypted sucessfully as design bugs are fixed.
  - [x] Test cases are Passed Sucessfully
  
  <details>
  <summary> Test Cases => Also available in 'Output.md' </summary>
  
 ```  
------------------- For Full Test Case Refer => " Output.md " File ------------------------
-
-     0.00ns INFO     Found test test_seq_detect_1011.test_seq_bug1
-     0.00ns INFO     running test_seq_bug1 (1/1)
- 15000.00ns INFO     Sequence : 00000000 
- 25000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 35000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 45000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 55000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 65000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 75000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 85000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 95000.00ns INFO     DUT input = > 0 
-                      Expected Output => 0 
-                      Output => 0 
-                                  Current State => 000 , Next State = >  000
- 95000.00ns INFO     
-                     ----------------------
+     0.00ns INFO     running test_rsa1 (1/1)
+    
+  1250.00ns INFO     Expected Public key --> 5  DUT Public Key --> 5
+  1250.00ns INFO     Expected Private key --> 29  DUT Private Key --> 29
+  1250.00ns INFO     Expected N : --> 91  DUT N : --> 91
+  1250.00ns INFO     Expected Phi(n) : --> 72  DUT Phi(n) : --> 72
+  1250.00ns INFO     
+                     Encryption...
+  1250.00ns INFO     EXPECTED ENCRYPTED OUTPUT ==> 39  DUT ENCRYPTED OUTPUT ==> 39 
+  2500.00ns INFO     
+                     Decryption...
+  2500.00ns INFO     EXPECTED DECRYPTED OUTPUT ==> 65  DUT DECRYPTED OUTPUT ==> 65
+                      
+  2500.00ns INFO     test_rsa1 passed
+  2500.00ns INFO     **************************************************************************************
+                     ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                     **************************************************************************************
+                     ** test_rsa.test_rsa1             PASS        2500.00           0.30       8330.56  **
+                     **************************************************************************************
+                     ** TESTS=1 PASS=1 FAIL=0 SKIP=0               2500.00           0.31       8059.02  **
+                     **************************************************************************************
                      
-                     .
-                     .
-                     .
-                     .
-                     .
-                        
-25215000.00ns INFO     Sequence : 11111100 
-25225000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25235000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25245000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25255000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25265000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25275000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25285000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 010 , Next State = >  000
-25295000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 000 , Next State = >  000
-25295000.00ns INFO     
-                       ----------------------
-                        
-25315000.00ns INFO     Sequence : 11111101 
-25325000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25335000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25345000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25355000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25365000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25375000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25385000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 010 , Next State = >  000
-25395000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 011 , Next State = >  100
-25395000.00ns INFO     
-                       ----------------------
-                        
-25415000.00ns INFO     Sequence : 11111110 
-25425000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25435000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25445000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25455000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25465000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25475000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25485000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25495000.00ns INFO     DUT input = > 0 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 010 , Next State = >  000
-25495000.00ns INFO     
-                       ----------------------
-                        
-25515000.00ns INFO     Sequence : 11111111 
-25525000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25535000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25545000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25555000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25565000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25575000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25585000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25595000.00ns INFO     DUT input = > 1 
-                        Expected Output => 0 
-                        Output => 0 
-                                    Current State => 001 , Next State = >  001
-25595000.00ns INFO     
-                       ----------------------
-                        
-25595000.00ns INFO     test_seq_bug1 passed
-25595000.00ns INFO     ********************************************************************************************
-                       ** TEST                                STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                       ********************************************************************************************
-                       ** test_seq_detect_1011.test_seq_bug1   PASS    25595000.00           0.78   33022815.63  **
-                       ********************************************************************************************
-                       ** TESTS=1 PASS=1 FAIL=0 SKIP=0                 25595000.00           0.79   32589225.59  **
-                       ********************************************************************************************
                        
                        
 ```
