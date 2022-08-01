@@ -31,7 +31,7 @@ Input is looped by all possible combination of an 8-bit number sequence because 
 
 A python logic is written for dectecting the expected output value of sequence detector
 
-```
+```python
         # Logic to Detect the Sequence
         a=format(i, '08b')
         dut._log.info(f"Sequence : {a} ")
