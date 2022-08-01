@@ -172,7 +172,7 @@ Bugs are Fixed and Test cases are successfully passed
 
 ![](Images/bug2.png)
 
-![](Images/bug2.png)
+![](Images/bug1.png)
 
 ![](Images/l2_3.png)
 
