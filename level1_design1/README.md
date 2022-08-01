@@ -56,7 +56,7 @@ During Execution Assertion Error is raised when Select line value = 12.
 
 ## --- :ant: :wrench:  Bug Fix --- 1
 
-This Bug is fixed by replacing `5'01101: out = 12 ` with `5'b01100: out = inp12;`
+This Bug is fixed by replacing `5'01101: out = 12`  with  `5'b01100: out = inp12;`
 
 ```verilog
  begin
