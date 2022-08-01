@@ -41,7 +41,7 @@
 :open_file_folder: [Bit Manipulation Co-processor](/level2_design/README.md)
 
 
-:open_file_folder: [RSA Algo](/level3_design/README.md)
+:open_file_folder: [RSA Algorithm](/level3_design/README.md)
 
 ---
 
