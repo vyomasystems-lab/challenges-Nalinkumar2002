@@ -16,13 +16,14 @@ module rsa_main(
 	 output [15:0] privateKey,
 	 output finish,
 	 output fin1
+	 output [15:0] phin;
     );
 	
 	 wire [15:0] MPower;
 	 parameter InstructionSelector = 0;
-	 reg [15:0] phin;
-
 	
+
+	assign phin=(prime_p-1)*(prime_q-1);
 	 
 	 public_key_gen k1 (prime_p,prime_q,start,clk,publicKey,finish);
 	 private_key_gen kd1 (prime_p,prime_q,publicKey,clk,start1,n,privateKey,fin1);
