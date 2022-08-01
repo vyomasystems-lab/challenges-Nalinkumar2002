@@ -126,7 +126,7 @@ Bugs are Fixed and test cases run successfully
  - [x] Test cases are Passed Successfully
  
  <details>
- <summary> Test Cases => Also available in `Output.md` </summary>
+ <summary> Test Cases => Also available in Output.log' </summary>
     
  ```  
 0.00ns INFO     Found test test_mux.test_mux

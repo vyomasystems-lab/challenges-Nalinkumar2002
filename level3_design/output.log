@@ -11,8 +11,6 @@ MODULE=test_rsa     TESTCASE= TOPLEVEL=rsa_main_bug    TOPLEVEL_LANG=verilog \
      0.00ns WARNING  Pytest not found, assertion rewriting will not occur
      0.00ns INFO     Found test test_rsa.test_rsa1
      0.00ns INFO     running test_rsa1 (1/1)
-7 13
-5 91 65
   1250.00ns INFO     Expected Public key --> 5  DUT Public Key --> 5
   1250.00ns INFO     Expected Private key --> 29  DUT Private Key --> 29
   1250.00ns INFO     Expected N : --> 91  DUT N : --> 91

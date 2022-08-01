@@ -189,10 +189,10 @@ Bugs are Fixed and Test cases are successfully passed
  - [x] Test cases are Passed Sucessfully
  
  <details>
- <summary> Test Cases => Also available in 'Output.md' </summary>
+ <summary> Test Cases => Also available in 'Output.log' </summary>
  
 ```  
------------------- For Full Test Cases Refer => " Output.md " File ------------------------
+------------------ For Full Test Cases Refer => " Output.log " File ------------------------
 
  0.00ns INFO     Found test test_mkbitmanip.run_test
  0.00ns INFO     running run_test (1/1)

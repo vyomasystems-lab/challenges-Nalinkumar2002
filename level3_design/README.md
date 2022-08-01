@@ -290,7 +290,7 @@ Bugs are Fixed and Test cases run successfully
  - [x] Test cases are Passed Sucessfully
  
  <details>
- <summary> Test Cases => Also available in 'Output.md' </summary>
+ <summary> Test Cases => Also available in 'Output.log' </summary>
  
 ```  
      0.00ns INFO     running test_rsa1 (1/1)

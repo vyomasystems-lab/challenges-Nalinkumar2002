@@ -204,10 +204,10 @@ Bugs are Fixed and Test cases run successfully
  - [x] Test cases are Passed Sucessfully
  
  <details>
- <summary> Test Cases => Also available in 'Output.md' </summary>
+ <summary> Test Cases => Also available in 'Output.log' </summary>
  
 ```  
------------------- For Full Test Case Refer => " Output.md " File ------------------------
+------------------ For Full Test Case Refer => " Output.log " File ------------------------
 
      0.00ns INFO     Found test test_seq_detect_1011.test_seq_bug1
      0.00ns INFO     running test_seq_bug1 (1/1)
