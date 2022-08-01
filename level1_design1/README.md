@@ -3,7 +3,7 @@
 # 📚 Multiplexer Design Verification - Level 1 -- Design 1
 </br>
 
-![img](Images/vs.png)
+![](Images/vs.png)
 
 ## 📝 Verification Environment
 
@@ -45,7 +45,7 @@ dut._log.info(f"Given input => {eval(f'dut.inp{i}.value')}\n Select line => {i} 
 
 ## --- :ant: :mag:  Bug --- 1
 
-![img](Images/bug1.png)
+![](Images/bug1.png)
 
 During Execution Assertion Error is raised when Select line value = 12.
 
@@ -82,7 +82,7 @@ This Bug is fixed by replacing `5'01101: out = 12`  with  `5'b01100: out = inp12
 
 After the First Bug is fixed, Assertion Error is raised when Select line input = 30
 
-![img](Images/bug1.png)
+![](Images/bug1.png)
 
 ```verilog
  begin
@@ -123,7 +123,9 @@ This Bug is fixed by including Select line input statement of 30.
  - [x] Test cases are Passed Sucessfully
  
  :calendar: <details> <summary> Test Cases </summary>
-         0.00ns INFO     Found test test_mux.test_mux
+    
+    ```
+     0.00ns INFO     Found test test_mux.test_mux
      0.00ns INFO     Found test test_mux.test_mux_1
      0.00ns INFO     running test_mux (1/2)
      1.00ns INFO     Given input => 01
@@ -266,7 +268,8 @@ This Bug is fixed by including Select line input statement of 30.
                      ** TESTS=2 PASS=2 FAIL=0 SKIP=0                 32.00           0.02       2000.03  **
                      **************************************************************************************
 
-                     
+     ```                
     </details>
+ 
  
   :heavy_check_mark: Design Verification is Complete
