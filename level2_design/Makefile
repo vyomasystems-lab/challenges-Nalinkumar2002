@@ -6,9 +6,12 @@ PWD=$(shell pwd)
 
 export PYTHONPATH := $(PWD):$(PYTHONPATH)  # reference model
 
-VERILOG_SOURCES = $(PWD)/mkbitmanip.v
+VERILOG_SOURCES = $(PWD)/mkbitmanip_snk_corrected.v
+TOPLEVEL := mkbitmanip_snk_corrected
 
-TOPLEVEL := mkbitmanip        # design
+# VERILOG_SOURCES = $(PWD)/mkbitmanip.v
+# TOPLEVEL := mkbitmanip      
+
 MODULE   := test_mkbitmanip   # test
 
 include $(shell cocotb-config --makefiles)/Makefile.sim

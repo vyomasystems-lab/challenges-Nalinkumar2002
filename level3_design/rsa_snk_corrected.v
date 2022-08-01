@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module rsa_main(
+module rsa_snk_corrected(
 	 // input is what you want to encrypt or decrypt
     input [15:0] Input,
 	 input [7:0]prime_p,
@@ -11,19 +11,19 @@ module rsa_main(
 	 input start2,
 	 output [7:0]publicKey,
 	 output [15:0]n,
-
 	 output [15:0]Output,
 	 output [15:0] privateKey,
 	 output finish,
-	 output fin1
-	 output [15:0] phin;
+	 output fin1,
+	 output [15:0] phin
     );
 	
 	 wire [15:0] MPower;
 	 parameter InstructionSelector = 0;
-	
 
-	assign phin=(prime_p-1)*(prime_q-1);
+	 assign phin=(prime_p-1)*(prime_q-1);
+	 // ----------------------------------------> BUG 
+	 //assign phin=(prime_p-1)+(prime_q-1);
 	 
 	 public_key_gen k1 (prime_p,prime_q,start,clk,publicKey,finish);
 	 private_key_gen kd1 (prime_p,prime_q,publicKey,clk,start1,n,privateKey,fin1);
@@ -78,6 +78,8 @@ begin
 		if(start) 
 		begin
 		x<=phin;
+		// -----------------------------> BUG 
+		// random <= 6;
 		random<=3;  //start checking gcd from random number=3
 		y<=3;
 		gcd<=0;
@@ -160,7 +162,9 @@ module private_key_gen(input [7:0] p,
 	 end
 	 
 	 end
-assign d=B[31:16];
+// ------------------------------>  BUG 
+// assign d=B;	 
+ assign d=B[31:16];
 
 assign finished=B[15:0]==1;
 endmodule
@@ -179,7 +183,7 @@ output [15:0] rem_final
 
 reg [15:0] ncount;
 reg [31:0]x,n1;
-wire outResult;
+wire [31:0] outResult;
 
 div32 d1(x,n1,outResult,rem_final);
 
@@ -189,6 +193,9 @@ begin
 		  if(start) begin
                 ncount = e-1;
 					 // $display("in start: ncount: %d; x: %d",ncount, x);
+					 
+					 // ---------------------------> BUG
+					 // Mpower = M-1;
 					 Mpower = M;
 					 x=0;
 					 n1={16'b0000000000000000,n};
@@ -267,7 +274,7 @@ module div32(A,B,Res,rem_fin);
     begin
         a1 = A;		
         b1 = B;		
-        p1= 0;			
+		p1 = 0;
         for(i=0;i < size_width;i=i+1)    begin
             p1 = {p1[size_width-2:0],a1[size_width-1]};
             a1[size_width-1:1] = a1[size_width-2:0];

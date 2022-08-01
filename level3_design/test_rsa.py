@@ -59,13 +59,33 @@ async def test_rsa1(dut):
     dut_n = int(dut.n.value)
     dut_encrypt = int(dut.Output.value)
     dut_phin = int(dut.phin.value)
+
+
+    # Error MESSAGES
+
+    error_message1 = f'Expected Public key --> {e}  DUT Public Key --> {int(dut_publicKey)}'
+    error_message2 = f'Expected Private key --> {d}  DUT Private Key --> {(dut_privateKey)}'
+    error_message3 = f'Expected N : --> {n}  DUT N : --> {(dut_n)}'
+    error_message4 = f'Expected Phi(n) : --> {phin}  DUT Phi(n) : --> {(dut_phin)}'
+    error_message5 = f'EXPECTED ENCRYPTED OUTPUT ==> {(encrypted_msg)}  DUT ENCRYPTED OUTPUT ==> {(dut_encrypt)} '
+   
+
     
     cocotb.log.info(f'Expected Public key --> {e}  DUT Public Key --> {(dut_publicKey)}')
+    assert e == dut_publicKey, error_message1  
+
     cocotb.log.info(f'Expected Private key --> {d}  DUT Private Key --> {(dut_privateKey)}')
+    assert d == dut_privateKey, error_message2   
+
     cocotb.log.info(f'Expected N : --> {n}  DUT N : --> {(dut_n)}')
+    assert n == dut_n, error_message3    
+
     cocotb.log.info(f'Expected Phi(n) : --> {phin}  DUT Phi(n) : --> {(dut_phin)}')
+    assert phin == dut_phin, error_message4  
+
     cocotb.log.info(f'\nEncryption...')
     cocotb.log.info(f'EXPECTED ENCRYPTED OUTPUT ==> {(encrypted_msg)}  DUT ENCRYPTED OUTPUT ==> {(dut_encrypt)} ')
+    assert encrypted_msg == dut_encrypt, error_message5    
 
     dut.Input.value = 1
     dut.prime_p.value = 0
@@ -94,18 +114,5 @@ async def test_rsa1(dut):
     dut_decrypt = int(dut.Output.value)
     cocotb.log.info(f'\nDecryption...')
     cocotb.log.info(f'EXPECTED DECRYPTED OUTPUT ==> {int(decrypted_msg)}  DUT DECRYPTED OUTPUT ==> {int(dut_decrypt)}\n ')
-    
-    # comparison
-    
-    error_message1 = f'Expected Public key --> {e}  DUT Public Key --> {int(dut_publicKey)}'
-    error_message2 = f'Expected Private key --> {d}  DUT Private Key --> {(dut_privateKey)}'
-    error_message3 = f'Expected N : --> {n}  DUT N : --> {(dut_n)}'
-    error_message4 = f'Expected Phi(n) : --> {phin}  DUT Phi(n) : --> {(dut_phin)}'
-    error_message5 = f'EXPECTED ENCRYPTED OUTPUT ==> {(encrypted_msg)}  DUT ENCRYPTED OUTPUT ==> {(dut_encrypt)} '
     error_message6 = f'EXPECTED DECRYPTED OUTPUT ==> {int(decrypted_msg)}  DUT DECRYPTED OUTPUT ==> {int(dut_decrypt)} '
-    assert e == dut_publicKey, error_message1
-    assert d == dut_privateKey, error_message2
-    assert n == dut_n, error_message3
-    assert phin == dut_phin, error_message4
-    assert encrypted_msg == dut_encrypt, error_message5
     assert decrypted_msg == dut_decrypt, error_message6

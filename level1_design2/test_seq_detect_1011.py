@@ -58,8 +58,8 @@ async def test_seq_bug1(dut):
             Current State => {dut.current_state.value} , Next State = >  {dut.next_state.value}')
 
             # Checking for Errors
-            assert out[j] == dut.seq_seen.value, f"Incorrect => Expected : {out[j]} Got : {dut.seq_seen.value}"
-        
+            assert out[j] == dut.seq_seen.value, f"Incorrect => Expected : {out[j]} Got : {dut.seq_seen.value} Number: {int(a,2)} Sequence ==> {a} "
+        dut._log.info(f'\n----------------------\n ')
         # Reset input bit to 0
         dut.inp_bit.value = 0 
 

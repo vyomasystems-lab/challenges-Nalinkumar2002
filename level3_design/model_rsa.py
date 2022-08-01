@@ -17,7 +17,7 @@ def mod_inverse(a, m):
 
 def generate_keypair(p, q):
 
-    print(p, q)
+    #print(p, q)
     n = p * q
     phi = (p - 1) * (q - 1)
 
@@ -38,7 +38,7 @@ def generate_keypair(p, q):
 
 def encrypt(msg_plaintext, package):
     e, n = package
-    print(e,n,msg_plaintext)
+    #print(e,n,msg_plaintext)
     msg_ciphertext = pow(msg_plaintext, e, n)
     
     return msg_ciphertext
